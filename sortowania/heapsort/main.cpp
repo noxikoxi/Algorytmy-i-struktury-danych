@@ -54,7 +54,7 @@ void heapSort(Iterator first, Iterator last, Compare com)
     for(auto it = last-1; it > first ;it--)
     {
         std::swap(*it, *first); // zamieniam pozcyja 1 i ostatni element
-        // od nowa buduje kopiec bez ostatniego elementu, on jest prawdilowo ustawiony
+        // od nowa buduje kopiec bez ostatniego elementu, on jest prawidlowo ustawiony
         rebuildMaxHeap(first, first, it, com); 
     }
 
