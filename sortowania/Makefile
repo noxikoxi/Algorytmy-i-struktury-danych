@@ -1,9 +1,10 @@
 # Makefile
-# Implementacja heapsort'u
+# spis polecen
+# Make: all clean quicksort heapsort
 #
-# Zawartosc katalogu:
-# main.cpp Makefile
-#
+# zmienne nazwowe
+NAME1 = quicksort
+NAME2 = heapsort
 # Kompilator g++.
 CC = g++
 # Mozliwe dodatkowe zmienne
@@ -11,11 +12,13 @@ CC = g++
 LIBS =
 CFLAGS = -Wall -std=c++11
 # Pliki obiektowe - powstaja z plikow *.cpp.
-OBJECTS = main.o 
+OBJECTS1 = $(NAME1).o
+OBJECTS2 = $(NAME2).o
 # Pliki naglowkowe - sa wlaczane do plikow *.cpp.
 HFILES = 
 # Koncowy plik wykonywalny.
-TARGET = main.out
+EXEC1 = $(NAME1).out
+EXEC2 = $(NAME2).out
 
 # Definicja domyslnej reguly wzorcowej.
 # $< oznacza nazwe pliku pierwszej zaleznosci reguly.
@@ -24,11 +27,24 @@ TARGET = main.out
 %.o : %.cpp $(HFILES) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(TARGET) : $(OBJECTS)
-	$(CC) $(CFLAGS) $(LIBS) $(OBJECTS) -o $(TARGET)
+$(EXEC1) : $(OBJECTS1)
+	$(CC) $(CFLAGS) $(LIBS) $(OBJECTS1) -o $@
 
-# Okreslenie celow sztucznych.
+$(EXEC2) : $(OBJECTS2)
+	$(CC) $(CFLAGS) $(LIBS) $(OBJECTS2) -o $@
+
+.PHONY : run1, run2, all
+
+all : $(EXEC1) $(EXEC2)
+
+run1 : $(EXEC1)
+	./$(EXEC1)
+
+run2: $(EXEC2)
+	./$(EXEC2)
+
+# Sprzatanie
 .PHONY : clean
 
 clean :
-	$(RM) $(TARGET) *.o core
+	$(RM) *.x *.o *.out core
