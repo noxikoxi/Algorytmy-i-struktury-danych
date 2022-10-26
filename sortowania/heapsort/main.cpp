@@ -2,10 +2,10 @@
 #include <vector>
 #include <random>
 #include <cassert>
-#include <algorithm>
+#include <algorithm> // dla is_sorted
 
 template<typename Iterator, typename Compare>
-void rebuildMaxHeap(Iterator first, Iterator it, Iterator last, Compare com) // Przywraca właściwości kopca
+void rebuildMaxHeap(Iterator first, Iterator it, Iterator last, Compare com) // Przywraca właściwości kopca, it jest rodzicem
 {
     auto index = std::distance(first, it); // do obliczenia dzieci
     Iterator extreme = it; // najwiekszy/najmniejszy element
@@ -70,7 +70,8 @@ void test1(std::mt19937 m, std::uniform_real_distribution<> u)
     }
 
     heapSort(v.begin(), v.end(), std::less<float>());
-    assert(std::is_sorted(v.begin(), v.end(), std::less<float>())); 
+    assert(std::is_sorted(v.begin(), v.end(), std::less<float>()));
+    std::cout <<"Test1 zakonczony pomyslnie\n"; 
 }
 
 void test2(std::mt19937 m, std::uniform_real_distribution<> u)
@@ -85,24 +86,22 @@ void test2(std::mt19937 m, std::uniform_real_distribution<> u)
 
     heapSort(tab, tab + (sizeof(tab) / sizeof(*tab)) , std::less<float>());
     assert(std::is_sorted(tab, tab + (sizeof(tab) / sizeof(*tab)), std::less<float>())); 
-
-
+    std::cout <<"Test2 zakonczony pomyslnie\n"; 
 }
 
 void test3()
 {
     char tab[] = {'a', 'a', 'b', 'e', 'h', 'z', 'g', 's', 'p', 'q'};
 
-    heapSort(tab, tab + (sizeof(tab) / sizeof(*tab)) , std::less<float>());
-    assert(std::is_sorted(tab, tab + (sizeof(tab) / sizeof(*tab)), std::less<float>())); 
+    heapSort(tab, tab + (sizeof(tab) / sizeof(*tab)), std::less<char>());
+    assert(std::is_sorted(tab, tab + (sizeof(tab) / sizeof(*tab)), std::less<char>()));
+    std::cout <<"Test3 zakonczony pomyslnie\n"; 
 }
-
-
 
 int main()
 {
-    std::random_device rd;
-    std::mt19937 gen(rd());
+    std::random_device rd; // ziarno dla generatora
+    std::mt19937 gen(rd()); // generator
     std::uniform_real_distribution<> distrib(-100.0, 100.0);
 
     test1(gen, distrib);
