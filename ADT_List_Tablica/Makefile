@@ -1,6 +1,4 @@
 # Makefile
-# spis polecen
-# Make: all clean run1
 #
 # zmienne nazwowe
 NAME1 = main
@@ -29,12 +27,9 @@ TARGET = $(NAME1).out
 $(TARGET) : $(OBJECTS)
 	$(CC) $(CFLAGS) $(LIBS) $(OBJECTS) -o $@
 
-.PHONY : run1, all
+.PHONY : all
 
 all : $(TARGET)
-
-run1 : $(TARGET)
-	./$(TARGET)
 
 # Sprzatanie
 .PHONY : clean

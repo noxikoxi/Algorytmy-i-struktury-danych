@@ -26,7 +26,7 @@ void test1()
     tab.pop_front();
     tab.pop_front();
     tab.pop_front();
-    tab.display(); // Mozna zauwazyc ze tablica sama sie skurczyla
+    tab.display(); // Mozna zauwazyc ze tablica sama sie zmniejszyla
     std:: cout << "Wielkosc Tablicy -> " << tab.size()<< "\nMax Wielkosc -> " << tab.max_size() << "\n";
     tab[1] = 222; // wstawianie poprzez [] dziala
     tab[0] = 111;
@@ -99,6 +99,8 @@ void test3()
 void testMerge()
 {
     ArrayList<float> a1;
+    float f = 5.79;
+    a1.push_back(f);
     a1.push_back(2.2);
     a1.push_back(5.4);
     a1.push_back(9.5);
@@ -107,7 +109,7 @@ void testMerge()
     a2.sort();
     a2.push_front(-2.2);
     a2.push_back(-1.34);
-    std::cout <<"\n****Test4****\n" << a1 << "\n" << a2;
+    std::cout <<"\n****Test Merge****\n" << a1 << "\n" << a2;
 
     a1.merge(a2);
     a1.display();

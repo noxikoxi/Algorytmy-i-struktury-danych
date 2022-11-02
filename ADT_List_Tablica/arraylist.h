@@ -18,7 +18,7 @@ class ArrayList {
 
     void extendArray(); // rozszerza tablice
     void reduceArray(size_t size); // zmniejsza tablice
-    void checkSize();
+    void checkSize(); // sprawdza ilosc wolnych pozycji
 
 public:
     ArrayList(size_t s=MIN_SIZE) : msize(s), last(0) {
@@ -104,13 +104,14 @@ void ArrayList<T>::extendArray()
 
     std::copy(this->tab, this->tab + this->msize, p); // kopiuje do niej elementy
 
-    this->msize += this->EXTEND_VAL; // zwiekszamy max mozliwa ilosc elementow
+    this->msize += this->EXTEND_VAL; // zwiekszam max mozliwa ilosc elementow
 
     delete[] this->tab; // usuwam stara tablice
 
     this->tab = p; // ustawiam wskaznik tablicy na p
 }
 
+// metoda rozsrzerza tablice jezeli brakuje miejsca na nowe elementy
 template<typename T>
 void ArrayList<T>::checkSize()
 {
@@ -118,7 +119,7 @@ void ArrayList<T>::checkSize()
         this->extendArray();
 }
 
-// funkcja zmniejszajaca tablice
+// metoda zmniejszajaca tablice
 template<typename T>
 void ArrayList<T>::reduceArray(size_t size)
 {
