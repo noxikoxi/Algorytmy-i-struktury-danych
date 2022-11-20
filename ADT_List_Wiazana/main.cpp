@@ -98,7 +98,7 @@ void test3()
     moveList.display();
     std::cout << "Dlugosc -> " << moveList.size() << "\n\n";
 
-        moveList1.display();
+    moveList1.display();
 
 }
 

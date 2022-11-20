@@ -1,8 +1,8 @@
-Implementacja na tablicy wiazanej ADT_LIST
+Implementacja ADT_LIST na tablicy podwojnie wiazanej 
 Autor: Tomasz Cach
 
 zawartosc katalogu:
-singlelist.h main.cpp Makefile readme.txt
+double.h main.cpp Makefile readme.txt
 
 Polecenia Makefile:
 - make all -> kompiluje program i tworzy plik wyjsciowy main.out

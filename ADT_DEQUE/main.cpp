@@ -19,7 +19,6 @@ int main()
     test_pop_back();
     test_clear();
     test_opearator();
-
 }
 
 void test_push_back()

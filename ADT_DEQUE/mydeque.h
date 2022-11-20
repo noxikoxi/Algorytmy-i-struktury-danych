@@ -130,7 +130,7 @@ MyDeque<T>& MyDeque<T>::operator=(const MyDeque& other) // copy assignment opera
         tab = new T[other.msize];
         head = tail = 0;
         assert(tab != nullptr); // alokacja pamieci sie nie udala
-
+ 
         for(auto i = other.head; i != other.tail; i = (i+1) % other.msize)
         {
             push_back(other.tab[i]);
