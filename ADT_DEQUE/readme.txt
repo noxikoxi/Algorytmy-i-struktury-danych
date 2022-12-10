@@ -1,4 +1,4 @@
-Implementacja na ADT_DEQUE
+Implementacja ADT_DEQUE
 Autor: Tomasz Cach
 
 zawartosc katalogu:
