@@ -2,7 +2,7 @@
 #
 # zmienne nazwowe
 NAME1 = main
-NAME2 = queue
+NAME2 = pQueue
 # Kompilator g++.
 CC = g++
 # Mozliwe dodatkowe zmienne
