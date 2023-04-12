@@ -11,7 +11,8 @@ LIBS =
 CFLAGS = -Wall -std=c++11
 # Pliki obiektowe - powstaja z plikow *.cpp.
 OBJECT1 = $(NAME1).o
-OBJECTS = $(OBJECT1)
+OBJECT2 = $(NAME2).o
+OBJECTS = $(OBJECT1) $(OBJECT2)
 # Pliki naglowkowe - sa wlaczane do plikow *.cpp.
 HFILES = $(NAME2).h
 # Koncowy plik wykonywalny.
