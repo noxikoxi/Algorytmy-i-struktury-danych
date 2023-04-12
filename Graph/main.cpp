@@ -188,6 +188,4 @@ void test_bfs()
     show(result, result + 8);
     checkVals(result, t3, 8);
     delete[] result;
-
-
 }
