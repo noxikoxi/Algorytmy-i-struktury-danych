@@ -1,9 +1,10 @@
 #include <iostream>
-#include "Graph.h"
+#include "Graph_listImplementation.h"
 #include <queue>
 #include <cassert>
 #include <fstream>
 #include <chrono>
+#include <stack>
 
 /*
 Mamy n sejfów. Każdy z nich można otworzyć odpowiednim kluczem lub zniszczyć, żeby dostać się do zawartości.
@@ -37,41 +38,23 @@ uint findMinSafeNum(Graph& g); // Zwraca najmniejsza liczbe sejfów do zniszczen
 
 uint test(const uint n, const int* keys); // Wypełnia graf według danych i zwraca najmniejsza liczbe sejfów do zniszczenia
 
+void checkTest(); // Wykonuje testy z pliku testy.txt
+
+void checkTxt(std::string name, uint correct); // Wykonuje pojedynczy test z pliku txt
+
 int main() // testy
 {
-    uint n, correct, nTests, tmp;
+    checkTest();
 
-    std::ifstream czytaj("testy.txt");
-    /*
-        testy.txt maja format: 
-            liczba testów w pierwszej linii, nastepnie
-            [ilosc sejfów] [poprawna odpowiedz] [miejsca wszystkich kluczy]
-        -1 w miejscach kluczy oznacza, że do danego sejfu nie ma klucza
-    */
-
-    std::cout << "Najmniejsza liczba zniszczonych sejfow:\n";
-    const auto start = std::chrono::steady_clock::now();
-    czytaj >> nTests; // Liczba testów
+    checkTxt("1_23.txt", 23);
+    checkTxt("2_3.txt", 3);
+    checkTxt("3_8.txt", 8);
+    checkTxt("4_1000.txt", 1000);
+    checkTxt("5_500.txt", 500);
+    checkTxt("6_2.txt", 2);
+    checkTxt("7_31.txt", 31);
+    checkTxt("8_5041.txt", 5041);
     
-    for(uint i = 0; i < nTests; ++i)
-    {
-        czytaj >> n >> correct;
-
-        int* keys = new int[n];
-        for(uint j = 0; j < n; ++j) // krawedzie do wczytania
-        {
-            czytaj >> keys[j];
-        }
-        tmp = test(n, keys);
-        std::cout<< "\tTest " << i << " -> " << tmp << "\n";
-        assert(correct == tmp);
-        delete[] keys;
-    }
-    czytaj.close();
-    const auto finish = std::chrono::steady_clock::now();
-
-    std::cout<< "\nWszystkie testy zostały zaliczone.\nCzas wykonania: " << 
-    std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count() << " ms\n";
 }
 
 uint findMinSafeNum(Graph& g)
@@ -126,4 +109,67 @@ uint test(const uint n, const int* keys)
     }
     // g.show(); // Wyswietla graf
     return findMinSafeNum(g);
+}
+
+void checkTest()
+{
+    uint n, correct, nTests, tmp;
+
+    std::ifstream czytaj("testy.txt");
+    /*
+        testy.txt maja format: 
+            liczba testów w pierwszej linii, nastepnie
+            [ilosc sejfów] [poprawna odpowiedz] [miejsca wszystkich kluczy]
+        -1 w miejscach kluczy oznacza, że do danego sejfu nie ma klucza
+    */
+
+    std::cout << "Najmniejsza liczba zniszczonych sejfow:\n";
+    const auto start = std::chrono::steady_clock::now();
+    czytaj >> nTests; // Liczba testów
+    
+    for(uint i = 0; i < nTests; ++i)
+    {
+        czytaj >> n >> correct;
+
+        int* keys = new int[n];
+        for(uint j = 0; j < n; ++j) // krawedzie do wczytania
+        {
+            czytaj >> keys[j];
+        }
+        tmp = test(n, keys);
+        std::cout<< "\tTest " << i << " -> " << tmp << "\n";
+        assert(correct == tmp);
+        delete[] keys;
+    }
+    czytaj.close();
+    const auto finish = std::chrono::steady_clock::now();
+
+    std::cout<< "\nWszystkie testy zostały zaliczone.\nCzas wykonania: " << 
+    std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count() << " ms\n";
+
+}
+
+void checkTxt(std::string name, uint correct)
+{
+    uint n, temp;
+    std::ifstream czytaj(name);
+    czytaj >> n;
+    Graph g(n);
+
+    for(uint i = 0; i < n; ++i)
+    {
+        czytaj >> temp;
+        g.addEdge(temp - 1, i);
+    }
+    const auto start = std::chrono::steady_clock::now();
+    std::cout << "\nTest: " << name << "\n";
+    temp = findMinSafeNum(g);
+    const auto finish = std::chrono::steady_clock::now();
+    std::cout << "Najmniejsza liczba zniszczonych sejfow: "<< temp <<"\n";
+    std::cout << "Czas wykonania: " <<
+    std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count() << " ms\n";
+
+    assert(temp == correct);
+
+    czytaj.close();
 }

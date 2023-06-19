@@ -2,7 +2,7 @@
 #
 # zmienne nazwowe
 NAME1 = sejfy
-NAME2 = Graph
+NAME2 = Graph_listImplementation
 # Kompilator g++.
 CC = g++
 # Mozliwe dodatkowe zmienne
